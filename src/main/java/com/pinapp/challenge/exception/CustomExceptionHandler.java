@@ -31,10 +31,10 @@ public class CustomExceptionHandler {
 
         boolean isValidationError = e instanceof MethodArgumentNotValidException;
         Optional<String> defaultMessage = isValidationError
-                ? Optional.ofNullable(((MethodArgumentNotValidException) e).getFieldError().getDefaultMessage()):
+                ? Optional.ofNullable(((MethodArgumentNotValidException) e).getFieldError().getDefaultMessage()) :
                 Optional.empty();
-        String message = defaultMessage.isEmpty()? e.getMessage() : defaultMessage.get();
-        String field =  isValidationError ? ((MethodArgumentNotValidException) e).getFieldError().getField() : "Edad/fechaNacimiento";
+        String message = defaultMessage.isEmpty() ? e.getMessage() : defaultMessage.get();
+        String field = isValidationError ? ((MethodArgumentNotValidException) e).getFieldError().getField() : "Edad/fechaNacimiento";
 
         BadReqExceptionResponse badReqExceptionResponse = BadReqExceptionResponse.builder()
                 .message(message)
@@ -44,7 +44,7 @@ public class CustomExceptionHandler {
                 .build();
 
         log.error(e.getMessage(), e);
-        return new ResponseEntity<>( badReqExceptionResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(badReqExceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
 }
