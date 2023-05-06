@@ -52,6 +52,7 @@ public class ClientController {
     @Operation(summary = "KPI de Clientes",
             description = "Devuelve el promedio de edad y la desviación estándar entre las edades de todos los clientes")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json"))
+    @CrossOrigin(origins = "*")
     public ResponseEntity<KpiDTO> kpiClientes(){
         try{
             KpiDTO kpi = clientService.getKpiAllClientes();
@@ -66,6 +67,7 @@ public class ClientController {
             description = "Devuelve los datos de todos los clientes con su fecha probable de muerte de cada uno," +
                     " basada en la expectativa de vida mundial.")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json"))
+    @CrossOrigin(origins = "*")
     public ResponseEntity<List<ClientDTORes>> listClients(){
         try{
             List<ClientDTORes> allClients = clientService.getAllClients();
