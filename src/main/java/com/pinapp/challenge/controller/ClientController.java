@@ -39,8 +39,8 @@ public class ClientController {
     @CrossOrigin(origins = "*")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Cliente creado con éxito", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Client.class))),
-            @ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BadReqExceptionResponse.class))),
-            @ApiResponse(responseCode = "409", description = "CONFLICT", content = @Content(mediaType = "string", examples = @ExampleObject(value= "Su fecha de nacimiento no coincide con la edad ingresada."),schema = @Schema(implementation = String.class)))}
+            @ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BadReqExceptionResponse.class)))}
+//            @ApiResponse(responseCode = "409", description = "CONFLICT", content = @Content(mediaType = "string", examples = @ExampleObject(value= "Su fecha de nacimiento no coincide con la edad ingresada."),schema = @Schema(implementation = String.class)))}
     )
 
     public ResponseEntity<Client> crearCliente(@Valid @RequestBody ClientDTO clientDTO) throws AgeConflictException, ParseException {

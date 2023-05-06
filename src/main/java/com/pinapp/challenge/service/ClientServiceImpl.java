@@ -43,9 +43,9 @@ public class ClientServiceImpl implements ClientService{
         Integer calculatedAge = today.getYear() - fechaNacimiento.getYear();
         Integer calculatedBirthYear = today.getYear() - edad;
         if(!calculatedAge.equals(edad)){
-            String message = String.format("Su fecha de nacimiento no coincide con la edad ingresada.\n" +
-                    "Estamos en el año %s. O bien usted tiene %s años o su nacimiento fue en %s.\n" +
-                            "Por favor reintente la operación introduciendo datos validos",
+            String message = String.format("Su fecha de nacimiento no coincide con la edad ingresada. " +
+                            "Estamos en el año %s. O bien usted tiene %s años o su nacimiento fue en %s. " +
+                            "Reintente la operación introduciendo datos validos",
                     today.getYear(), calculatedAge, calculatedBirthYear);
             throw new AgeConflictException(message);
         }
