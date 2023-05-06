@@ -50,18 +50,22 @@ Antes de ejecutar la aplicación, asegúrate de tener instalado Java 17 y MySQL 
 
 ### En la línea de comandos:
 
-Ejecuta el comando 
+1. Ejecuta el comando 
 
 `java -jar -Dspring.datasource.url=jdbc:mysql://localhost:3306/nombre_de_la_base_de_datos -Dspring.datasource.username=nombre_de_usuario -Dspring.datasource.password=contraseña_de_usuario nombre_de_la_aplicacion.jar` 
 
 !! Reemplaza "nombre_de_la_base_de_datos", "nombre_de_usuario" y "contraseña_de_usuario" con la información correspondiente. (Si es necesario también reemplaza el  puerto)
 
-Abre tu terminal y navega hasta la carpeta raíz del proyecto.
+2. Abre tu terminal y navega hasta la carpeta raíz del proyecto.
 
-Ejecuta el siguiente comando para compilar y empaquetar la aplicación:
+3. Ejecuta el siguiente comando para compilar y empaquetar la aplicación:
 
 `
 ./mvnw clean package 
 `
 
- 
+### Una vez finalizados estos pasos, ya puedes levantar el proyecto normalmente de forma local! 
+
+Podrás acceder a las Apis documentadas en Swagger siguiendo una ruta como esta: http://localhost:8080/challenge/swagger-ui/index.html 
+
+*Recuerda cambiar el puerto 8080 por el correspondiente de acuerdo a tu servidor local 
