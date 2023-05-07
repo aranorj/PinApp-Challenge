@@ -96,4 +96,4 @@ El parámetro A representa la tasa de mortalidad inicial de una población, es d
 
 La fórmula toma la edad actual de una persona y utiliza los parámetros A, B y C para calcular la probabilidad de que esa persona sobreviva hasta la siguiente edad. A partir de esta probabilidad, se puede calcular, iterando, la expectativa de vida restante de la persona, es decir, cuántos años se espera que viva a partir de su edad actual.
 
-De este modo se tiene en cuenta que la persona ha vivido hasta la actualidad y se calcula su fecha de muerte probable a partir de su edad actual, con lo cual se obtienen resultados variables y siempre positivos dentro de un rango de edad máxima establecido en 120 años. 
+De este modo se tiene en cuenta que la persona ha vivido hasta la actualidad y se calcula su fecha de muerte probable a partir de su edad actual, con lo cual se obtienen resultados variables y siempre positivos dentro de un rango de edad máxima establecido en 100 años. 
