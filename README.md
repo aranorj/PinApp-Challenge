@@ -83,3 +83,28 @@ De esta forma, la conexión quedará reemplazada por la configuracion de tu VM.
 ### Una vez finalizados estos pasos, ya puedes levantar el proyecto normalmente de forma local! 
 
 Podrás acceder a las Apis documentadas en Swagger siguiendo una ruta como esta: http://localhost:3000/swagger-ui/index.html 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Datos Extra 
+
+### Cómo se realizo el cálculo de fecha de muerte probable: 
+
+__Problema:__
+
+Inicialmente la fecha de muerte probable se calculó en base a la esperanza de vida promedio mundial (73 años), sumándola a la fecha de nacimiento del cliente. 
+Sin embargo, se encontró en que esto redundaba en que todos los clientes morian a la misma edad y los clientes mayores de 73 años ¡ya deberían estar muertos! 
+
+__Solución:__ 
+
+Se decidio utilizar la fórmula de la *Ley de Gompertz-Makeham* para la estimación de la expectativa de vida de nuestra población hipotética de clientes. 
+
+La fórmula tiene tres parámetros, A, B y C, que representan diferentes factores que influyen en la mortalidad de una población.
+
+El parámetro A representa la tasa de mortalidad inicial de una población, es decir, la probabilidad de morir a cualquier edad. El parámetro B representa la tasa de mortalidad que aumenta exponencialmente con la edad. Por último, el parámetro C representa la tasa de mortalidad que aumenta de manera acelerada a medida que una persona envejece.
+
+*Se usaron parámetros hipotéticos para una población con baja tasa de mortalidad y alta expectativa de vida.*
+
+La fórmula toma la edad actual de una persona y utiliza los parámetros A, B y C para calcular la probabilidad de que esa persona sobreviva hasta la siguiente edad. A partir de esta probabilidad, se puede calcular, iterando, la expectativa de vida restante de la persona, es decir, cuántos años se espera que viva a partir de su edad actual.
+
+De este modo se tiene en cuenta que la persona ha vivido hasta la actualidad y se calcula su fecha de muerte probable a partir de su edad actual, con lo cual se obtienen resultados variables y siempre positivos dentro de un rango de edad máxima establecido en 120 años. 
