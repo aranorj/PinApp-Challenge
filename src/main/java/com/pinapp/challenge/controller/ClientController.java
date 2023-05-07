@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/")
 public class ClientController {
 
@@ -35,7 +36,6 @@ public class ClientController {
 
     @PostMapping("creacliente")
     @Operation(summary = "Crear cliente", description = "Ingresa un nuevo cliente a la base de datos")
-    @CrossOrigin(origins = "*")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Cliente creado con éxito", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Client.class))),
             @ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BadReqExceptionResponse.class)))
@@ -50,7 +50,6 @@ public class ClientController {
     @Operation(summary = "KPI de Clientes",
             description = "Devuelve el promedio de edad y la desviación estándar entre las edades de todos los clientes")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json"))
-    @CrossOrigin(origins = "*")
     public ResponseEntity<KpiDTO> kpiClientes(){
         try{
             KpiDTO kpi = clientService.getKpiAllClientes();
@@ -65,7 +64,6 @@ public class ClientController {
             description = "Devuelve los datos de todos los clientes con su fecha probable de muerte de cada uno," +
                     " basada en datos de mortandad de una población hipotética.")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json"))
-    @CrossOrigin(origins = "*")
     public ResponseEntity<List<ClientDTORes>> listClients(){
         try{
             List<ClientDTORes> allClients = clientService.getAllClients();
