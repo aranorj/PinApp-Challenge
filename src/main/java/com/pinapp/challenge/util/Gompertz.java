@@ -5,12 +5,27 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Gompertz {
 
-    //Parametros para una población hipotética con alta expectativa de vida
-    final static double A = 4.0; // tasa de mortalidad constante en la población
-    final static double B = 0.0005; // tasa de mortalidad que varía en función de la edad
-    final static double C = 0.0001; // tasa de aceleración de la mortalidad a medida que la edad aumenta
-
     public static Double getTotalLifeExpectancyByAge(Integer edad) {
+
+        double A; // tasa de mortalidad constante en la población
+        double B;// tasa de mortalidad que varía en función de la edad
+        double C; // tasa de aceleración de la mortalidad a medida que la edad aumenta
+
+        //Se separa en 3 grupos etarios para poder manipular a la población con mas detalle
+
+        if (edad <= 30) { //mortandad baja en la juventud
+            A = 3.0;
+            B = 0.0005;
+            C = 0.0001;
+        } else if (edad <= 70) { //media en la adultez
+            A = 4.0;
+            B = 0.0006;
+            C = 0.0002;
+        } else { // elevada en la ancianidad
+            A = 6.0;
+            B = 0.001;
+            C = 0.001;
+        }
 
         // Calcular la probabilidad de supervivencia para la edad actual segun la Ley de Gompertz-Makeham
         double q = Math.exp(-(A + B * edad + C * Math.pow(edad, 2)));
