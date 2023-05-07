@@ -7,7 +7,7 @@ Challenge técnico de JAVA Backend para la empresa PinApp
 - API Rest documentada en Swagger
 - Disponible *temporalmente* en: https://capable-rainstorm-production.up.railway.app/swagger-ui/index.html
 
-## Features
+## Features :rocket:
 
 La aplicación permite: 
 
