@@ -3,7 +3,7 @@ Challenge técnico de JAVA Backend para la empresa PinApp
 
 ## Descripción
 
-- Microservicios desarrollado en JAVASpring boot
+- Microservicios desarrollados en JAVASpring boot
 - API Rest documentada en Swagger
 - Disponible *temporalmente* en: https://capable-rainstorm-production.up.railway.app/swagger-ui/index.html
 
