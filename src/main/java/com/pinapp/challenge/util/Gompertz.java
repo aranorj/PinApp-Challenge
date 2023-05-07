@@ -2,10 +2,7 @@ package com.pinapp.challenge.util;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class Gompertz {
-
-
     static double A; // tasa de mortalidad constante en la población
     static double B;// tasa de mortalidad que varía en función de la edad
     static double C; // tasa de aceleración de la mortalidad a medida que la edad aumenta
@@ -38,8 +35,6 @@ public class Gompertz {
             lifeExpectancy += qi;
         }
         lifeExpectancy /= q;
-
-        log.info(edad + " " +lifeExpectancy);
 
         return lifeExpectancy + edad;
     }
