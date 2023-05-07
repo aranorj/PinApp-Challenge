@@ -8,18 +8,16 @@ import com.pinapp.challenge.persistence.entities.Client;
 import com.pinapp.challenge.persistence.repositories.ClientRepository;
 import com.pinapp.challenge.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ClientServiceImpl implements ClientService{
-
-    private final Integer EXPECTATIVA_VIDA_MUNDIAL = 73;
 
     @Autowired
     ClientRepository clientRepository;
@@ -40,13 +38,14 @@ public class ClientServiceImpl implements ClientService{
         Integer edad = clientDTO.getEdad();
         LocalDate today = LocalDate.now();
         LocalDate fechaNacimiento = LocalDate.parse(clientDTO.getFechaNacimiento());
-        Integer calculatedAge = today.getYear() - fechaNacimiento.getYear();
-        Integer calculatedBirthYear = today.getYear() - edad;
+        Integer calculatedAge = Period.between(fechaNacimiento, today).getYears();
+        Integer calculatedBirthYear = today.minusYears(edad).getYear();
         if(!calculatedAge.equals(edad)){
             String message = String.format("Su fecha de nacimiento no coincide con la edad ingresada. " +
-                            "Estamos en el año %s. O bien usted tiene %s años o su nacimiento fue en %s. " +
+                            "Hoy es %s. Si su día de nacimiento es correcto, usted tiene %s años o su nacimiento fue en %s. " +
                             "Reintente la operación introduciendo datos validos",
-                    today.getYear(), calculatedAge, calculatedBirthYear);
+                    today, calculatedAge, calculatedBirthYear);
+                    
             throw new AgeConflictException(message);
         }
 
@@ -61,19 +60,43 @@ public class ClientServiceImpl implements ClientService{
     public List<ClientDTORes> getAllClients(){
         List<Client> clients = clientRepository.findAll();
         DateTimeFormatter latinFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
         List<ClientDTORes> clientDTOList = new ArrayList<>();
-            for(Client client : clients){
-                ClientDTORes clientDTO =  converter.convertClientToDto(client);
-                LocalDate fechaMuerteProbable = calcularFechaMuerteProbable(client.getEdad());
-                clientDTO.setFechaMuerteProbable(fechaMuerteProbable.format(latinFormat));
-                clientDTOList.add(clientDTO);
-            }
-            return clientDTOList;
+        for(Client client : clients){
+            ClientDTORes clientDTO =  converter.convertClientToDto(client);
+            LocalDate fechaMuerteProbable = getProbableDeathDate(client.getEdad());
+            clientDTO.setFechaMuerteProbable(fechaMuerteProbable.format(latinFormat));
+            clientDTOList.add(clientDTO);
+        }
+        return clientDTOList;
     }
 
-    private LocalDate calcularFechaMuerteProbable(Integer edad) {
-        return LocalDate.now().plusYears(EXPECTATIVA_VIDA_MUNDIAL - edad);
+    private LocalDate getProbableDeathDate(Integer edad) {
+        double  yearsToAdd =getLifeExpectancyByAge(edad);
+        long daysToAdd = Math.round(yearsToAdd * 365.25); // Aprox. dias del año para incluir feriados
+        return LocalDate.now().plusDays(daysToAdd);
+    }
+
+    private Double getLifeExpectancyByAge(Integer edad) {
+
+        //Parametros para una población hipotética con alta expectativa de vida
+
+        double A = 3.0; // tasa de mortalidad constante en la población
+        double B = 0.0001; // tasa de mortalidad que varía en función de la edad
+        double C = 0.00016; // tasa de aceleración de la mortalidad a medida que la edad aumenta
+
+        // Calcular la probabilidad de supervivencia para la edad actual segun la Ley de Gompertz-Makeham
+        double q = Math.exp(-(A + B * edad + C * Math.pow(edad, 2)));
+
+        // Calcular la expectativa de vida restante en base a las probababilidades año a año
+        double lifeExpectancy = 0.0;
+        int maxAge = 102;
+        for (int i = edad; i < maxAge; i++) {
+            double qi = Math.exp(-(A + B * i + C * Math.pow(i, 2)));
+            lifeExpectancy += qi;
+        }
+        lifeExpectancy /= q;
+
+        return lifeExpectancy;
     }
 
     @Override
