@@ -71,7 +71,7 @@ a. Ejecuta el comando
 
 ### Una vez finalizados estos pasos, ya puedes levantar el proyecto normalmente de forma local! :raised_hands:
 
-Podrás acceder a las Apis documentadas en Swagger siguiendo una ruta como esta: http://localhost:3000/swagger-ui/index.html 
+Podrás acceder localmente a las Apis documentadas en Swagger siguiendo una ruta como esta: http://localhost:3000/swagger-ui/index.html 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
