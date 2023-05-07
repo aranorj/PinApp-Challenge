@@ -28,7 +28,7 @@ Antes de ejecutar la aplicación, asegúrate de tener instalado Java 17 en tu m�
 
 1. Clona este repositorio en tu máquina.
 
-2. Actualmente el proyecto esta conectado a una Base de Datos en Railway. Sin embargo, no estará disponible para siempre y puede que sea conveniente conectarlo a tu propia base MySQL
+2. Actualmente el proyecto esta conectado a una Base de Datos en Railway. Sin embargo, para levantarlo localmente necesitarás conectarlo a tu propia base MySQL
 Para ello puedes agregar estas opciones a la maquina virtual (VM Options) con los datos de conexión a tu base de datos:
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -41,12 +41,12 @@ b. Navega hasta la pestaña "VM options".
 c. Agrega las opciones de la máquina virtual 
 
 ```VM Options
--Dspring.datasource.url=jdbc:mysql://localhost:3306/nombre_de_la_base_de_datos 
--Dspring.datasource.username=nombre_de_usuario 
--Dspring.datasource.password=contraseña_de_usuario
+-DMYSQLURL=jdbc:mysql://host:puerto/nombre_de_la_base_de_datos
+-DMYSQLUSERNAME=nombre_de_usuario
+-DMYSQLPASSWORD=contraseña_de_usuario
 ```
+!! Reemplaza "nombre_de_la_base_de_datos", "host", "puerto", "nombre_de_usuario" y "contraseña_de_usuario" con la información correspondiente.
 
-!! Reemplaza "nombre_de_la_base_de_datos", "nombre_de_usuario" y "contraseña_de_usuario" con la información correspondiente. (Si es necesario también reemplaza el  puerto)
 
 d. Guarda la configuración de ejecución.
 
@@ -55,20 +55,9 @@ d. Guarda la configuración de ejecución.
 
 a. Ejecuta el comando 
 
-`java -jar -Dspring.datasource.url=jdbc:mysql://localhost:3306/nombre_de_la_base_de_datos -Dspring.datasource.username=nombre_de_usuario -Dspring.datasource.password=contraseña_de_usuario nombre_de_la_aplicacion.jar` 
+`java -jar -DMYSQLURL=jdbc:mysql://host:puerto/nombre_de_la_base_de_datos --DMYSQLUSERNAME=nombre_de_usuario --DMYSQLPASSWORD=contraseña_de_usuario nombre_de_la_aplicacion.jar` 
 
-!! Reemplaza "nombre_de_la_base_de_datos", "nombre_de_usuario" y "contraseña_de_usuario" con la información correspondiente. (Si es necesario también reemplaza el  puerto)
-
-
-
-3. Una vez hecho esto, elimina del archivo application.properties las lineas correspondientes a :
-
-```application.properties
-spring.datasource.url=
-spring.datasource.username=
-spring.datasource.password=
-```
-De esta forma, la conexión quedará reemplazada por la configuracion de tu VM.
+!! Reemplaza "nombre_de_la_base_de_datos", "host", "puerto", "nombre_de_usuario", "contraseña_de_usuario" y nombre_de_la_aplicacion.jar con la información correspondiente.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -88,7 +77,7 @@ Podrás acceder a las Apis documentadas en Swagger siguiendo una ruta como esta:
 
 ## Datos Extra 
 
-### Cómo se realizo el cálculo de fecha de muerte probable: 
+### Cómo se realizó el cálculo de fecha de muerte probable: 
 
 __Problema:__
 
