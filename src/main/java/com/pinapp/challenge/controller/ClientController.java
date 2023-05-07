@@ -9,7 +9,6 @@ import com.pinapp.challenge.persistence.entities.Client;
 import com.pinapp.challenge.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -64,7 +63,7 @@ public class ClientController {
     @GetMapping("listclientes")
     @Operation(summary = "Listar clientes",
             description = "Devuelve los datos de todos los clientes con su fecha probable de muerte de cada uno," +
-                    " basada en la expectativa de vida mundial.")
+                    " basada en datos de mortandad de una población hipotética.")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json"))
     @CrossOrigin(origins = "*")
     public ResponseEntity<List<ClientDTORes>> listClients(){

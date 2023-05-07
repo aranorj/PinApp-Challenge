@@ -59,20 +59,43 @@ public class ClientServiceImpl implements ClientService{
     public List<ClientDTORes> getAllClients(){
         List<Client> clients = clientRepository.findAll();
         DateTimeFormatter latinFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
         List<ClientDTORes> clientDTOList = new ArrayList<>();
-            for(Client client : clients){
-                ClientDTORes clientDTO =  converter.convertClientToDto(client);
-                LocalDate fechaMuerteProbable = calcularFechaMuerteProbable(client.getEdad(), client.getFechaNacimiento());
-                clientDTO.setFechaMuerteProbable(fechaMuerteProbable.format(latinFormat));
-                clientDTOList.add(clientDTO);
-            }
-            return clientDTOList;
+        for(Client client : clients){
+            ClientDTORes clientDTO =  converter.convertClientToDto(client);
+            LocalDate fechaMuerteProbable = getProbableDeathDate(client.getEdad());
+            clientDTO.setFechaMuerteProbable(fechaMuerteProbable.format(latinFormat));
+            clientDTOList.add(clientDTO);
+        }
+        return clientDTOList;
     }
 
-    private LocalDate calcularFechaMuerteProbable(Integer edad, LocalDate fechaNacimiento) {
-        Integer EXPECTATIVA_VIDA_MUNDIAL = 73;
-        return fechaNacimiento.plusYears(EXPECTATIVA_VIDA_MUNDIAL - edad);
+    private LocalDate getProbableDeathDate(Integer edad) {
+        double  yearsToAdd =getLifeExpectancyByAge(edad);
+        long daysToAdd = Math.round(yearsToAdd * 365.25); // Aprox. dias del año para incluir feriados
+        return LocalDate.now().plusDays(daysToAdd);
+    }
+
+    private Double getLifeExpectancyByAge(Integer edad) {
+
+        //Parametros para una población hipotética con alta expectativa de vida
+
+        double A = 3.0; // tasa de mortalidad constante en la población
+        double B = 0.0001; // tasa de mortalidad que varía en función de la edad
+        double C = 0.00016; // tasa de aceleración de la mortalidad a medida que la edad aumenta
+
+        // Calcular la probabilidad de supervivencia para la edad actual segun la Ley de Gompertz-Makeham
+        double q = Math.exp(-(A + B * edad + C * Math.pow(edad, 2)));
+
+        // Calcular la expectativa de vida restante en base a las probababilidades año a año
+        double lifeExpectancy = 0.0;
+        int maxAge = 102;
+        for (int i = edad; i < maxAge; i++) {
+            double qi = Math.exp(-(A + B * i + C * Math.pow(i, 2)));
+            lifeExpectancy += qi;
+        }
+        lifeExpectancy /= q;
+
+        return lifeExpectancy;
     }
 
     @Override
