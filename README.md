@@ -103,7 +103,7 @@ La fórmula tiene tres parámetros, A, B y C, que representan diferentes factore
 
 El parámetro A representa la tasa de mortalidad inicial de una población, es decir, la probabilidad de morir a cualquier edad. El parámetro B representa la tasa de mortalidad que aumenta exponencialmente con la edad. Por último, el parámetro C representa la tasa de mortalidad que aumenta de manera acelerada a medida que una persona envejece.
 
-*Se usaron parámetros hipotéticos para una población con baja tasa de mortalidad y alta expectativa de vida.*
+*Se usaron parámetros hipotéticos para una población con baja tasa de mortalidad y alta expectativa de vida. Dividiéndola en 3 grupos etarios.*
 
 La fórmula toma la edad actual de una persona y utiliza los parámetros A, B y C para calcular la probabilidad de que esa persona sobreviva hasta la siguiente edad. A partir de esta probabilidad, se puede calcular, iterando, la expectativa de vida restante de la persona, es decir, cuántos años se espera que viva a partir de su edad actual.
 
