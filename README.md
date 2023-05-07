@@ -8,18 +8,24 @@ Challenge técnico de JAVA Backend para la empresa PinApp
 - Disponible *temporalmente* en: https://capable-rainstorm-production.up.railway.app/swagger-ui/index.html
 
 ## Features
-● Endpoint de Entrada ```POST /creacliente ```
-- Nombre
-- Apellido
-- Edad
-- Fecha de nacimiento
 
-● Endpoint de salida ``` GET /kpideclientes ```
-- Promedio edad entre todos los clientes
-- Desviación estándar entre las edades de todos los clientes
+La aplicación permite: 
 
-● Endpoint de salida ``` GET /listclientes ```
-- Lista de personas con todos los datos + fecha probable de muerte de cada una
+- __Cargar nuevos clientes en la base de datos__ ingresando los siguientes atributos:
+    - Nombre
+    - Apellido
+    - Edad
+    - Fecha de nacimiento
+
+  *Controla que los datos ingresados sean válidos y que la edad coincida con la fecha de nacimiento ingresada.*
+
+- __Consultar el KPI de clientes__ que contiene:
+    - Promedio edad entre todos los clientes
+    - Desviación estándar entre las edades de todos los clientes
+
+- __Obtener la lista de clientes__ con: 
+    - Todos los datos
+    - Fecha probable de muerte de cada persona.
 
 
 ## Instrucciones para ejecutar la aplicación :page_facing_up:
