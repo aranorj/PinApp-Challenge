@@ -5,14 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Gompertz {
 
+
+    static double A; // tasa de mortalidad constante en la población
+    static double B;// tasa de mortalidad que varía en función de la edad
+    static double C; // tasa de aceleración de la mortalidad a medida que la edad aumenta
+
     public static Double getTotalLifeExpectancyByAge(Integer edad) {
 
-        double A; // tasa de mortalidad constante en la población
-        double B;// tasa de mortalidad que varía en función de la edad
-        double C; // tasa de aceleración de la mortalidad a medida que la edad aumenta
-
         //Se separa en 3 grupos etarios para poder manipular a la población con mas detalle
-
         if (edad <= 30) { //mortandad baja en la juventud
             A = 3.0;
             B = 0.0005;
