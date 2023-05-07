@@ -45,6 +45,7 @@ public class ClientServiceImpl implements ClientService{
                             "Hoy es %s. Si su día de nacimiento es correcto, usted tiene %s años o su nacimiento fue en %s. " +
                             "Reintente la operación introduciendo datos validos",
                     today, calculatedAge, calculatedBirthYear);
+                    
             throw new AgeConflictException(message);
         }
 
