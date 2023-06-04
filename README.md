@@ -1,5 +1,5 @@
-# PinApp-Challenge
-Challenge técnico de JAVA Backend para la empresa PinApp
+# Rest API - Challenge
+Challenge técnico de JAVA Backend para software factory argentina
 
 ## Descripción
 
